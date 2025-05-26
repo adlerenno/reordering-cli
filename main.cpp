@@ -96,13 +96,13 @@ int main(int argc, char** argv) {
                 break;
             case 't':
                 check_mode(mode_compress, mode_read, true, "t");
-                if (strcmp(optarg, "unorder") == 0)
+                if (optarg == "unorder")
                     type = 0;
-                else if (strcmp(optarg, "revH") == 0)
+                else if (optarg == "revH")
                     type = 1;
-                else if (strcmp(optarg, "revV") == 0)
+                else if (optarg == "revV")
                     type = 2;
-                else if (strcmp(optarg, "revVH") == 0)
+                else if (optarg == "revVH")
                     type = 3;
                 else {
                     printf("Invalid type Type.");

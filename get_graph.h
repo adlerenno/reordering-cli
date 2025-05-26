@@ -23,5 +23,6 @@ struct Edge
 };
 
 void getGraph(const string &filename, vector<vector<int>> &hyperEdge, unordered_map<int, vector<int>> &hyperNode);
+void getGraph_reordering_vertices_hyperedges(const string &filename, vector<vector<int>> &hyperEdge);
 
 #endif //REORDERING_GET_GRAPH_H

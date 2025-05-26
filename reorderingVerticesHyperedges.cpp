@@ -22,36 +22,6 @@
 #include "get_graph.h"
 using namespace std;
 
-void getGraph_reordering_vertices_hyperedges(const string &filename, vector<vector<int>> &hyperEdge)
-{
-    ifstream fin(filename, ios::in);
-    if (!fin)
-    {
-        cerr << "Error opening file " << filename << endl;
-        exit(1);
-    }
-    int count = -1;
-    string str;
-    while (getline(fin, str))
-    {
-        if (str.empty())
-            continue;
-        istringstream ss(str);
-        int tmp;
-        vector<int> e;
-        while (ss >> tmp)
-        {
-            if (find(e.begin(), e.end(), tmp) == e.end())
-                e.push_back(tmp);
-        }
-        if (e.size() < 2)
-            continue;
-        count++;
-        hyperEdge.push_back(e);
-    }
-    fin.close();
-}
-
 void getMapID(const vector<vector<int>> &a, const vector<vector<int>> &b, unordered_map<int, int> &ID)
 {
     for (int i = 0; i < a.size(); i++)
