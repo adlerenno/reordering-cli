@@ -3,10 +3,27 @@
 //
 #include <iostream>
 #include <string>
+#include <vector>
 #include <fstream>
 #include <sstream>
+#include <set>
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+#include <queue>
+#include <chrono>
+#include <map>
+#include <climits>
+#include <algorithm>
+#include <random>
+#include <thread>
+#include <mutex>
+#ifdef USE_OPENMP
+#include <omp.h>
+#endif
 
 #include "get_graph.h"
+using namespace std;
 
 void getGraph(const string &filename, vector<vector<int>> &hyperEdge, unordered_map<int, vector<int>> &hyperNode)
 {
