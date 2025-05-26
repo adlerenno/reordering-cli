@@ -149,8 +149,8 @@ int main(int argc, char** argv) {
                 solve_reordering_vertices(input_file, output_file, true);
                 break;
             case 3:
-                std::string unc_hyp = temp_dir + "/temp_unc_hyp";
-                std::string unc_ver = temp_dir + "/temp_unc_ver";
+                std::string unc_hyp = temp_dir + "temp_unc_hyp";
+                std::string unc_ver = temp_dir + "temp_unc_ver";
                 solve_reordering_hyperedges(input_file, unc_hyp, false);
                 solve_reordering_vertices(input_file, unc_ver, false);
                 solve_reordering_vertices_hyperedges(input_file, unc_ver, unc_hyp, output_file);
