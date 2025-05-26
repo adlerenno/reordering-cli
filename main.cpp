@@ -82,10 +82,10 @@ int main(int argc, char** argv) {
         switch (opt) {
             case 'i':
                 input_file = optarg;
-                if (!exists(input_file)) {
-                    printf("Invalid input file.");
-                    return EXIT_FAILURE;
-                }
+//                if (!exists(input_file)) {
+//                    printf("Invalid input file.");
+//                    return EXIT_FAILURE;
+//                }
                 break;
             case 'o':
                 check_mode(mode_compress, mode_read, true, "o");
