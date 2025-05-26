@@ -96,13 +96,13 @@ int main(int argc, char** argv) {
                 break;
             case 't':
                 check_mode(mode_compress, mode_read, true, "t");
-                if (optarg == "unorder")
+                if (std::string(optarg) == "unorder")
                     type = 0;
-                else if (optarg == "revH")
+                else if (std::string(optarg) == "revH")
                     type = 1;
-                else if (optarg == "revV")
+                else if (std::string(optarg) == "revV")
                     type = 2;
-                else if (optarg == "revVH")
+                else if (std::string(optarg) == "revVH")
                     type = 3;
                 else {
                     printf("Invalid type Type.");
