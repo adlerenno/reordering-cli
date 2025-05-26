@@ -17,23 +17,31 @@ add_definitions(-D_LARGEFILE_SOURCE -D_LARGE_FILES -D_FILE_OFFSET_BITS=64)
 
 # get files with "find include src -type f -name '*.c' | sort"
 set(SOURCES
-        compressUnordering.hpp
-        compressUnordering.cpp
-        reorderingHyperedges.hpp
-        reorderingHyperedges.cpp
-        reorderingVertices.hpp
-        reorderingVertices.cpp
-        reorderingVerticesHyperedges.hpp
-        reorderingVerticesHyperedges.cpp
+        compress/compressUnordering.hpp
+        compress/compressUnordering.cpp
+        compress/reorderingHyperedges.hpp
+        compress/reorderingHyperedges.cpp
+        compress/reorderingVertices.hpp
+        compress/reorderingVertices.cpp
+        compress/reorderingVerticesHyperedges.hpp
+        compress/reorderingVerticesHyperedges.cpp
         main.cpp
         get_graph.cpp
         get_graph.h
+        read/NQAdjList.hpp
+        read/NQAdjList.cpp
+        read/NQOneDimArray.hpp
+        read/NQOneDimArray.cpp
+        read/query.cpp
+        read/query.hpp
 )
 
 set(INCLUDES
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${CMAKE_CURRENT_BINARY_DIR}
         /usr/local/include
+        compress
+        read
 )
 
 

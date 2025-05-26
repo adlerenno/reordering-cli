@@ -99,3 +99,92 @@ void getGraph_reordering_vertices_hyperedges(const string &filename, vector<vect
         exit(1);
     }
 }
+
+void load_graph(const string &input_file, vector<Vertex> &vertexSet, vector<int> &hyperedgeSet, vector<Edge> &edgeID, vector<int> &edgeSet)
+{
+    ifstream fin(input_file + "-vertexSet");
+    while (true)
+    {
+        string str;
+        getline(fin, str);
+        if (str == "")
+            break;
+        istringstream ss(str);
+        int a, b, c;
+        ss >> a >> b >> c;
+        Vertex tmp;
+        tmp.ID = a;
+        tmp.posStar = b;
+        tmp.posEnd = c;
+        vertexSet.push_back(tmp);
+    }
+    fin.close();
+
+    fin.open(input_file + "-hyperedgeSet");
+    int a;
+    while (fin >> a)
+    {
+        hyperedgeSet.push_back(a);
+    }
+    fin.close();
+
+    fin.open(input_file + "-edgeID");
+    while (true)
+    {
+        string str;
+        getline(fin, str);
+        if (str == "")
+            break;
+        istringstream ss(str);
+        int a, b, c;
+        ss >> a >> b >> c;
+        Edge tmp;
+        tmp.ID = a;
+        tmp.posStar = b;
+        tmp.posEnd = c;
+        edgeID.push_back(tmp);
+    }
+    fin.close();
+
+    fin.open(input_file + "-edgeSet");
+    while (fin >> a)
+    {
+        edgeSet.push_back(a);
+    }
+    fin.close();
+}
+
+void load_incidence_graph(const string &str, vector<vector<int>> &hyperEdge, vector<vector<int>> &hyperNode)
+{
+    string filename = "/home/C++Projects/graphData/standardized_hypergraph/" + str;
+    ifstream fin(filename, ios::in);
+    int count = -1;
+    unordered_map<int, vector<int>> tmpnode;
+    int maxID = INT_MIN;
+    while (true)
+    {
+        string str;
+        getline(fin, str);
+        if (str == "")
+            break;
+        istringstream ss(str);
+        int tmp;
+        vector<int> e;
+        while (ss >> tmp)
+        {
+            e.push_back(tmp);
+        }
+        count++;
+        hyperEdge.push_back(e);
+        for (auto &node : e)
+        {
+            tmpnode[node].push_back(count);
+            maxID = max(maxID, node);
+        }
+    }
+    hyperNode.resize(maxID + 1);
+    for (auto &info : tmpnode)
+    {
+        hyperNode[info.first] = info.second;
+    }
+}

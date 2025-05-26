@@ -12,6 +12,7 @@
 #include "reorderingHyperedges.hpp"
 #include "reorderingVertices.hpp"
 #include "reorderingVerticesHyperedges.hpp"
+#include "query.hpp"
 
 using namespace std;
 using namespace std::filesystem;
@@ -24,6 +25,7 @@ using namespace std::filesystem;
 #define TYPE_REORDER_HYPEREDGES "reH"
 #define TYPE_REORDER_VERTICES "reV"
 #define TYPE_REORDER_VERTICES_HYPEREDGES "reVH"
+#define TYPE_INCIDENCE_LIST "inc"
 
 
 static void print_usage(bool error) {
@@ -33,8 +35,8 @@ static void print_usage(bool error) {
 	"\n"
 	" * to compress a hypergraph:\n"
     "   reordering-cli -i [input_file] -o [output] -t {" TYPE_UNORDER "|" TYPE_REORDER_HYPEREDGES "|" TYPE_REORDER_VERTICES "|" TYPE_REORDER_VERTICES_HYPEREDGES "} -x [temp_dir]\n"
-//    " * to read a hypergraph:\n"
-//    "   reordering-cli -i [input] -t [type] -q [list of nodes] \n"
+    " * to read a hypergraph:\n"
+    "   reordering-cli -i [input] -t {" TYPE_UNORDER "|" TYPE_REORDER_HYPEREDGES "|" TYPE_REORDER_VERTICES "|" TYPE_REORDER_VERTICES_HYPEREDGES "|" TYPE_INCIDENCE_LIST "} -q [query_file] \n"
 
 	;
 	FILE* os = error ? stderr : stdout;
@@ -60,6 +62,7 @@ do { \
     } \
 } while(0)
 
+
 int main(int argc, char** argv) {
 	if(argc <= 1) {
 		print_usage(true);
@@ -75,7 +78,7 @@ int main(int argc, char** argv) {
     int type = 0;
     bool mode_compress = false;
     bool mode_read = false;
-    while ((opt = getopt(argc, argv, "hi:o:t:x:q:f:")) != -1) {
+    while ((opt = getopt(argc, argv, "hi:o:t:x:q:")) != -1) {
         switch (opt) {
             case 'i':
                 input_file = optarg;
@@ -101,7 +104,6 @@ int main(int argc, char** argv) {
                 }
                 break;
             case 't':
-                check_mode(mode_compress, mode_read, true, "t");
                 if (std::string(optarg) == TYPE_UNORDER)
                     type = 0;
                 else if (std::string(optarg) == TYPE_REORDER_HYPEREDGES)
@@ -110,6 +112,10 @@ int main(int argc, char** argv) {
                     type = 2;
                 else if (std::string(optarg) == TYPE_REORDER_VERTICES_HYPEREDGES)
                     type = 3;
+                else if (std::string(optarg) == TYPE_INCIDENCE_LIST)  {
+                    check_mode(mode_compress, mode_read, false, "t");
+                    type = 4;
+                }
                 else {
                     printf("Invalid type Type.");
                     print_usage(true);
@@ -118,10 +124,6 @@ int main(int argc, char** argv) {
                 break;
             case 'q':
                 check_mode(mode_compress, mode_read, false, "q");
-                node_query = optarg;
-                break;
-            case 'f':
-                check_mode(mode_compress, mode_read, false, "f");
                 test_file = optarg;
                 if (!exists(test_file)) {
                     printf("Invalid test file.");
@@ -156,8 +158,14 @@ int main(int argc, char** argv) {
         }
     }
     if (mode_read) {
-        fprintf(stderr, "Not yet implemented.");
-        return EXIT_FAILURE;
+        if (type == 4)
+        {
+            perform_query(input_file, test_file, 1);
+        }
+        else
+        {
+            perform_query(input_file, test_file, 0);
+        }
     }
     return EXIT_SUCCESS;
 }
