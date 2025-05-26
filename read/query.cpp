@@ -30,8 +30,8 @@ void perform_query(const string& input_file, const string& query_file, int type)
 
         std::ifstream query(query_file);
         std::string line;
-        std::stringstream ss;
         while (std::getline(query, line)) {
+            std::stringstream ss;
             ss.str(line);
             uint64_t num;
             while (ss >> num) {
@@ -46,8 +46,9 @@ void perform_query(const string& input_file, const string& query_file, int type)
         load_incidence_graph(input_file, hyperEdge, hyperNode);
         std::ifstream query(query_file);
         std::string line;
-        std::stringstream ss;
+
         while (std::getline(query, line)) {
+            std::stringstream ss;
             ss.str(line);
             uint64_t num;
             while (ss >> num) {

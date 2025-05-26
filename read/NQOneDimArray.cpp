@@ -29,6 +29,14 @@ void do_query_reordering(vector<Vertex> &vertexSet, vector<int> &hyperedgeSet, v
         for (int j = edgeID[e].posStar; j < edgeID[e].posEnd; j++)
         {
             int u = edgeSet[j];
+            visited[u] = true;
         }
     }
+    int sum = 0;
+    for (int i = 0; i < int(vertexSet.size()); i++)
+    {
+        if (visited[i])
+            sum++;
+    }
+    cout << "Found " << sum << " nodes connected." << endl;
 }

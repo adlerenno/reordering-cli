@@ -154,10 +154,9 @@ void load_graph(const string &input_file, vector<Vertex> &vertexSet, vector<int>
     fin.close();
 }
 
-void load_incidence_graph(const string &str, vector<vector<int>> &hyperEdge, vector<vector<int>> &hyperNode)
+void load_incidence_graph(const string &input_file, vector<vector<int>> &hyperEdge, vector<vector<int>> &hyperNode)
 {
-    string filename = "/home/C++Projects/graphData/standardized_hypergraph/" + str;
-    ifstream fin(filename, ios::in);
+    ifstream fin(input_file, ios::in);
     int count = -1;
     unordered_map<int, vector<int>> tmpnode;
     int maxID = INT_MIN;
@@ -168,11 +167,13 @@ void load_incidence_graph(const string &str, vector<vector<int>> &hyperEdge, vec
         if (str == "")
             break;
         istringstream ss(str);
-        int tmp;
         vector<int> e;
-        while (ss >> tmp)
+        string token;
+        while (getline(ss, token, ','))
         {
-            e.push_back(tmp);
+            int tmp = stoi(token);
+            if (find(e.begin(), e.end(), tmp) == e.end())
+                e.push_back(tmp);
         }
         count++;
         hyperEdge.push_back(e);
