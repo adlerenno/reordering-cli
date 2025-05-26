@@ -20,13 +20,19 @@ using namespace std::filesystem;
 #define STRINGIFY( x) #x
 #define STR(x) STRINGIFY(x)
 
+#define TYPE_UNORDER "unorder"
+#define TYPE_REORDER_HYPEREDGES "reH"
+#define TYPE_REORDER_VERTICES "reV"
+#define TYPE_REORDER_VERTICES_HYPEREDGES "reVH"
+
+
 static void print_usage(bool error) {
 	static const char* usage_str = \
 	"Usage: reordering-cli\n"
 	"    -h    show this help\n"
 	"\n"
 	" * to compress a hypergraph:\n"
-	"   reordering-cli -i [input_file] -o [output] -t {unorder|reH|reV|reVH} -x [temp_dir]\n"
+    "   reordering-cli -i [input_file] -o [output] -t {" TYPE_UNORDER "|" TYPE_REORDER_HYPEREDGES "|" TYPE_REORDER_VERTICES "|" TYPE_REORDER_VERTICES_HYPEREDGES "} -x [temp_dir]\n"
 //    " * to read a hypergraph:\n"
 //    "   reordering-cli -i [input] -t [type] -q [list of nodes] \n"
 
@@ -96,13 +102,13 @@ int main(int argc, char** argv) {
                 break;
             case 't':
                 check_mode(mode_compress, mode_read, true, "t");
-                if (std::string(optarg) == "unorder")
+                if (std::string(optarg) == TYPE_UNORDER)
                     type = 0;
-                else if (std::string(optarg) == "revH")
+                else if (std::string(optarg) == TYPE_REORDER_HYPEREDGES)
                     type = 1;
-                else if (std::string(optarg) == "revV")
+                else if (std::string(optarg) == TYPE_REORDER_VERTICES)
                     type = 2;
-                else if (std::string(optarg) == "revVH")
+                else if (std::string(optarg) == TYPE_REORDER_VERTICES_HYPEREDGES)
                     type = 3;
                 else {
                     printf("Invalid type Type.");
