@@ -217,11 +217,11 @@ void solve_reordering_vertices_hyperedges(const string &input_file, const string
     unordered_map<int, int> ID;
     vector<vector<int>> a;
     vector<vector<int>> b;
-    getGraph_reordering_vertices_hyperedges(input_file, a);
-    getGraph_reordering_vertices_hyperedges(vertices_uncompressed_file, b);
+    getGraph_reordering_vertices_hyperedges(input_file, a, ',');
+    getGraph_reordering_vertices_hyperedges(vertices_uncompressed_file, b, ' ');
     getMapID(a, b, ID);
     vector<vector<int>> hyperEdge;
-    getGraph_reordering_vertices_hyperedges(hyperedges_uncompressed_file, hyperEdge);
+    getGraph_reordering_vertices_hyperedges(hyperedges_uncompressed_file, hyperEdge, ' ');
     for (int i = 0; i < hyperEdge.size(); i++)
     {
         for (int j = 0; j < hyperEdge[i].size(); j++)

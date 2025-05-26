@@ -63,7 +63,7 @@ void getGraph(const string &filename, vector<vector<int>> &hyperEdge, unordered_
     }
 }
 
-void getGraph_reordering_vertices_hyperedges(const string &filename, vector<vector<int>> &hyperEdge)
+void getGraph_reordering_vertices_hyperedges(const string &filename, vector<vector<int>> &hyperEdge, char separator)
 {
 
     ifstream fin(filename, ios::in);
@@ -82,7 +82,7 @@ void getGraph_reordering_vertices_hyperedges(const string &filename, vector<vect
         istringstream ss(str);
         vector<int> e;
         string token;
-        while (getline(ss, token, ','))
+        while (getline(ss, token, separator))
         {
             int tmp = stoi(token);
             if (find(e.begin(), e.end(), tmp) == e.end())

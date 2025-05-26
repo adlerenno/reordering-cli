@@ -137,6 +137,10 @@ int main(int argc, char** argv) {
         }
     }
 
+    if (temp_dir.empty()) {
+        temp_dir = output_file;
+    }
+
     if (mode_compress) {
         switch (type) {
             case 0:
