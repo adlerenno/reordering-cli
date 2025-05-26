@@ -344,7 +344,7 @@ void solve_reordering_vertices(const string &input_file, const string &output_fi
     vector<int> edgeSet;
     int w = 16;
     reconstructGraph_reordering_vertices(hyperEdge, hyperNode, vertexSet, hyperedgeSet, edgeID, edgeSet, w);
-    output_reordering_vertices(input_file, compressed_out, hyperEdge, hyperNode, vertexSet, hyperedgeSet, edgeID, edgeSet, w);
+    output_reordering_vertices(output_file, compressed_out, hyperEdge, hyperNode, vertexSet, hyperedgeSet, edgeID, edgeSet, w);
     #pragma omp critical
     {
         cout << "file:" << "done!" << endl;
